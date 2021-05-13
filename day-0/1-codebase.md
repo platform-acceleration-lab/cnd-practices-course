@@ -4,13 +4,25 @@
 
 ### Get the scaffold codebase and review it
 
+-   Fork the
+    [tracker](https://github.com/platform-acceleration-lab/tracker)
+    repo to your Github account.
+
 -   Checkout the start point from the tracker codebase:
 
     ```bash
     cd ~/workspace
-    git clone git@github.com/billkable/tracker-cf.git
-    cd tracker-cf
+    git clone https://github.com/<your account>/tracker.git
+    cd tracker
     ```
+
+    *Tip*:
+    Consider setting up
+    [SSH keys and using SSH protocol](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh) with
+    [Deploy keys](https://docs.github.com/en/developers/overview/managing-deploy-keys#deploy-keys),
+    or set up
+    [OAuth token](https://docs.github.com/en/developers/overview/managing-deploy-keys#https-cloning-with-oauth-tokens) for https access,
+    if you prefer to avoid interactive authentication.
 
 -   The current start point of the codebase contains a starter project
     that has the following:
