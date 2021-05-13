@@ -37,4 +37,6 @@ and navigate the following in order to execute the course:
 1.  [Backlog Feature](./day-2/1-backlog-feature.md)
 1.  [Handling Failures](./day-2/2-handling-failures.md)
 1.  [Scaling for Growth](./day-2/3-scaling-for-growth.md)
+1.  [Evolve Codebase](./day-2/4-evolve-codebase.md)
+1.  [Evolve Architecture](./day-2/5-evolve-architecture.md)
 

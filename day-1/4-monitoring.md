@@ -2,8 +2,6 @@
 
 ## Monitoring your application
 
-### Monitoring through app manager
-
 ### Simulate some load
 
 ### Evaluate a baseline for your application

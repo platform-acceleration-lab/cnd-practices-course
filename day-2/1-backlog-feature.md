@@ -2,27 +2,10 @@
 
 ## Adding a new feature (Backlog)
 
-- Add CRUD feature for Backlog
-- Profiling and setting a baseline
-- Zero downtime update (Blue/Green or Rolling update with Branch by abstraction)
+### Add CRUD feature for Backlog
 
-## Handling failures
+### Profiling and setting a baseline
 
--   Find the cracks
-    - troubleshooting errors via logs and stack traces
--   Tuning for production stability
-    - liveness probes
+### Zero downtime update
 
-## Scaling for growth
-
--   Forecasting capacity:
-    time series assessment
--   Getting things small:
-    - measure a baseline
-    - reduce container size
--   Scaling out via linear extrapolation
-
-## Evolving your codebase
-
-## Evolving your architecture
-
+- Blue/Green or Rolling update with Branch by abstraction)
