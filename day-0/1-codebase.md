@@ -80,30 +80,29 @@ one for development, and one for local testing.
 -   View the output of the following endpoints,
     in a browser of your choice:
 
-    -   Database migration endpoints:
-        `http://localhost:8081/actuator/flyway`
+    -   Database [migration endpoints](http://localhost:8081/actuator/flyway):
 
         This will show that you have no database migrations yet.
         As we build out our application functionality we will create
         migrations as we go along.
 
-    -   Tracker application health endpoint:
-        `http://localhost:8080/actuator/health`
+    -   Tracker application
+        [health endpoint](http://localhost:8080/actuator/health):
 
         Notice that you see full details here.
         You will see that the Spring Boot application will show the
         state of the connections to the database.
 
-    -   Tracker application readiness endpoint:
-        `http://localhost:8080/actuator/health/readiness`
+    -   Tracker application
+        [readiness endpoint](http://localhost:8080/actuator/health/readiness):
 
         This indicates whether or not the tracker application is ready
         to do work,
         and typically used by platforms at start up time to determine
         when to route traffic to it.
 
-    -   Tracker application liveness endpoint:
-        `http://localhost:8080/actuator/health/liveness`
+    -   Tracker application
+        [liveness endpoint](http://localhost:8080/actuator/health/liveness):
 
         This indicates whether or not the tracker application is "live",
         or able to do work.
