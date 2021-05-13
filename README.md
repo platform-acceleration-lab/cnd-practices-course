@@ -30,6 +30,7 @@ and navigate the following in order to execute the course:
 1.  [Production Environment](./day-1/1-bootstrap-production-environment.md)
 1.  [Continuous Deployment Pipeline](./day-1/2-cd-pipeline.md)
 1.  [Release](./day-1/3-release.md)
+1.  [Monitoring](./day-1/4-monitoring.md)
 
 ## Day 2
 
