@@ -124,7 +124,7 @@ and tracker applications:
         `- route: tracker-migration-dev-{your initials}.{DOMAIN}`
 
     -   Tracker application:
-        `- route: tracker-{your initials}.{DOMAIN}`
+        `- route: tracker-dev-{your initials}.{DOMAIN}`
 
     The `{DOMAIN}` placeholder will be replaced by the domain you
     identified in step 1.
