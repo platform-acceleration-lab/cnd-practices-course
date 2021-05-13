@@ -1,109 +1,5 @@
 # Green Field Cloud Native App - Day 0
 
-## Bootstrap a database backed web app project
-
-### Get the scaffold codebase and review it
-
--   Checkout the start point from the tracker codebase:
-
-    ```bash
-    cd ~/workspace
-    git clone git@github.com/billkable/tracker-cf.git
-    cd tracker-cf
-    ```
-
--   The current start point of the codebase contains a starter project
-    that has the following:
-
-    -   A master project that coordinates build of multiple subprojects.
-        See `settings.gradle` to view the configuration.
-
-    -   Sub projects for:
-
-        -   A database-backed blocking web application:
-            `applications/tracker/build.gradle`
-
-        -   An application to manage the changes (migrations) of the
-            `tracker` application databases:
-            `db-migrations/tracker-migration/build.gradle`
-
-    -   Build dependencies for both projects include:
-
-        -   *Spring Boot*
-        -   *Spring JDBC* or *Spring Data JDBC* (for database access)
-        -   Either *Postgres* or *MySQL* database backends are supported
-        -   *Spring Boot Actuator* - used for lifecycle management and
-            monitoring your application processes
-
-    -   Database migration tests:
-        `db-migrations/tracker-migration/src/test/java/com/vmware/education/tracker/MigrationTests.java`
-
-    -   Web application health tests
-        `applications/tracker/src/main/java/com/vmware/education/tracker/ActuatorTests.java`
-
-You have all the code here necessary to start work,
-but you will need local databases set up first.
-
-### Setup local development databases
-
-You will use Docker to manage and run your local development
-databases.
-
-Using docker makes it convenient to spin up, destroy, or refresh your
-development databases without working about persistent installation of
-a particular version of a database engine.
-
-You will create a single database *server* instance,
-but within it you will create two schemas (or databases),
-one for development, and one for local testing.
-
-### Run the scaffold locally to test the plumbing
-
--   Build and run tests:
-
-    `./gradlew clean build`
-
--   Run the migration application locally via boot run:
-
-    `./gradlew :db-migrations:tracker-migration:bootRun`
-
--   Run the tracker application locally via boot run:
-
-    `./gradlew :application:tracker:bootRun`
-
--   View the output of the following endpoints:
-
-    -   Database migration endpoints:
-        `http://localhost:8081/actuator/flyway`
-
-        This will show that you have no database migrations yet.
-        As we build out our application functionality we will create
-        migrations as we go along.
-
-    -   Tracker application health endpoint:
-        `http://localhost:8080/actuator/health`
-
-        Notice that you see full details here.
-        You will see that the Spring Boot application will show the
-        state of the connections to the database.
-
-    -   Tracker application readiness endpoint:
-        `http://localhost:8080/actuator/health/readiness`
-
-        This indicates whether or not the tracker application is ready
-        to do work,
-        and typically used by platforms at start up time to determine
-        when to route traffic to it.
-
-    -   Tracker application liveness endpoint:
-        `http://localhost:8080/actuator/health/liveness`
-
-        This indicates whether or not the tracker application is "live",
-        or able to do work.
-        It can be configured with the application deployment such that
-        the platform can monitor and dispose of unhealthy application
-        processes.
-
 ## Configure and run in a platform development sandbox (Cloud Foundry)
 
 ### Access the development sandbox on the platform
@@ -197,8 +93,8 @@ configure the development environment in your currently targeted
 `sandbox` space with the *Ingress Route* or *Hostname* for you migration
 and tracker applications:
 
-1.  Find out the domain of your Cloud Foundry foundation by running the
-    following command:
+1.  Find out the base domain of your Cloud Foundry foundation by running
+    the following command:
 
     `cf domains`
 
@@ -278,18 +174,153 @@ Let's deploy the tracker migration and application:
 
     `cf push -f deployments/cf/dev/manifest.yml`
 
+    Notice the tracker migration is deployed first.
+    The database is required by the tracker application,
+    so the `tracker-migration` is required to deploy before the
+    `tracker` application for the initial release.
 
+    Later we will see that the migration and application may change at
+    different rates.
 
-### Deploy and run the application in the development sandbox
+1.  View the output of the following endpoints:
 
-## Configure a CI Pipeline (Github Actions)
+    -   Database migration endpoints:
+        `https://{tracker development migration route}/actuator/flyway`
 
-The github actions workflow is supplied to you as the scaffold.
-But you will need to configure credentials and set up databases for
-review/staging and production environments.
+        This will show that you have no database migrations yet.
+        As we build out our application functionality we will create
+        migrations as we go along.
 
+    -   Tracker application health endpoint:
+        `https://{tracker development application route}/actuator/health`
 
+        Notice that you see full details here.
+        You will see that the Spring Boot application will show the
+        state of the connections to the database.
 
+    -   Tracker application readiness endpoint:
+        `http://{tracker development application route}/actuator/health/readiness`
+
+        This indicates whether or not the tracker application is ready
+        to do work,
+        and typically used by platforms at start up time to determine
+        when to route traffic to it.
+
+    -   Tracker application liveness endpoint:
+        `http://{tracker development application route}/actuator/health/liveness`
+
+        This indicates whether or not the tracker application is "live",
+        or able to do work.
+        It can be configured with the application deployment such that
+        the platform can monitor and dispose of unhealthy application
+        processes.
+
+## Configure the Review Environment
+
+### Create the review environment
+
+You will run the *Review Environment* on the same foundation and same
+*Organization* as your development sandbox.
+
+In reality you might run this on an alternate foundation and/or
+organization,
+but for constraints running the course on common infrastructure,
+you will run under your instructor assigned organization.
+
+1.  Create a review space as follows:
+
+    `cf create-space review`
+
+1.  Switch your workstation context to point to the review environment:
+
+    `cf target -s review`
+
+### Deploy the review database server instance in review environment
+
+Before you can configure and deploy an application in review environment,
+you need to create a database server machine.
+
+You will create the database with the same procedure as you did when
+creating the database in the developer sandbox:
+
+1.  Execute the following:
+
+    `cf create-service p.mysql db-small tracker-database`
+
+1.  View the output of the command,
+    you should see something like this:
+
+    ```bash
+    Creating service instance tracker-database in org <your org> / space review as <user username>...
+    OK
+
+    Create in progress. Use 'cf services' or 'cf service tracker-database' to check operation status.
+    ```
+
+1.  Run the following command to see the status of the database creation
+    process:
+
+    `cf services`
+
+    You will see an output similar to the following:
+
+    ```bash
+    Getting services in org <your org> / space review as <your username>...
+
+    name               service   plan       bound apps   last operation       broker                   upgrade available
+    tracker-database   p.mysql   db-small                create in progress   dedicated-mysql-broker   no
+    ```
+
+## Configure a Continuous Integration Pipeline
+
+You will use [Github Actions](https://docs.github.com/en/actions) to
+implement your pipelines in this course.
+
+1.  The codebase supplies the initial Continuous Integration pipeline
+    workflow.
+    Cherry pick it now:
+
+    `git cherry-pick pipeline`
+
+1.  Review the pipeline at `.github/workflows/ci.yml`
+
+    -   The `build-and-publish` job is the key part of
+        Continuous Integration that allows developers to integrate their
+        work frequently on a mainline branch.
+        It builds and tests the migration and application code with an
+        integrated database.
+
+    -   The `deploy` job takes the published Spring Boot application
+        fat jar files from the `build-and-publish` job,
+        and deploys them to the *Review* environment.
+        Notice the `env` section,
+        it sources credentials that you will configure next.
+
+1.  Recall the Cloud Foundry credentials you used when you manually
+    connected to,
+    and deployed to your developer sandbox environment.
+    Use the following command if you do not remember:
+
+    `cf target`
+
+    *Note:*
+    You need to configure the `CF_SPACE` as `review`.
+    Contact your instructor if you forgot your password.
+
+1.  With the Cloud Foundry credentials you recalled from the last step,
+    configure the following
+    [Github Repository Secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+
+    -   Cloud Foundry Foundation Controller URL:
+        `CF_API_URL`
+    -   Organization:
+        `CF_ORG`
+    -   Space:
+        `CF_SPACE`
+    -   User Name (the instructor gave to you): `CF_USERNAME`
+    -   User Password (the instructor gave to you): `CF_PASSWORD`
+
+1.
 ## Build a basic CRUD app
 
 - time entry

@@ -17,6 +17,23 @@ Fork the accompanying codebase from
 [here](https://github.com/platform-acceleration-lab/tracker.git),
 and navigate the following in order to execute the course:
 
-- [Day 0](./day-0.md)
-- [Day 1](./day-1.md)
-- [Day 2](./day-2.md)
+## Day 0
+
+1.  [Codebase](./day-0/1-codebase.md)
+1.  [Dev Sandbox](./day-0/2-dev-sandbox.md)
+1.  [Review Environment](./day-0/3-review-environment.md)
+1.  [Continuous Integration Pipeline](./day-0/4-ci-pipeline.md)
+1.  [Time Entry Feature](./day-0/5-time-entry-feature.md)
+
+## Day 1
+
+1.  [Production Environment](./day-1/1-bootstrap-production-environment.md)
+1.  [Continuous Deployment Pipeline](./day-1/2-cd-pipeline.md)
+1.  [Release](./day-1/3-release.md)
+
+## Day 2
+
+1.  [Backlog Feature](./day-2/1-backlog-feature.md)
+1.  [Handling Failures](./day-2/2-handling-failures.md)
+1.  [Scaling for Growth](./day-2/3-scaling-for-growth.md)
+
