@@ -9,7 +9,9 @@ implement your pipelines in this course.
     workflow.
     Cherry pick it now:
 
-    `git cherry-pick pipeline`
+    ```bash
+    git cherry-pick pipeline
+    ```
 
 1.  Review the pipeline at `.github/workflows/ci.yml`
 
@@ -30,7 +32,9 @@ implement your pipelines in this course.
     and deployed to your developer sandbox environment.
     Use the following command if you do not remember:
 
-    `cf target`
+    ```bash
+    cf target
+    ```
 
     *Note:*
     You need to configure the `CF_SPACE` as `review`.

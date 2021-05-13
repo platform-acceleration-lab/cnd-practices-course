@@ -15,6 +15,10 @@
     You will be prompted for a user name and password,
     using what your instructor provided to you.
 
+    ```bash
+    cf login
+    ```
+
 1.  Observe the output.
     On Cloud Foundry,
     you are provided an *Organization*, or *Org* for short.
@@ -34,6 +38,10 @@
     the org,
     and space.
 
+    ```bash
+    cf target
+    ```
+
     You will see later that the `cf target` command can be use to switch
     your workstation context to point to different orgs or spaces.
 
@@ -49,7 +57,9 @@ Let's do that now:
 
 1.  Execute the following:
 
-    `cf create-service p.mysql db-small tracker-database`
+    ```bash
+    cf create-service p.mysql db-small tracker-database
+    ```
 
 1.  View the output of the command,
     you should see something like this:
@@ -68,7 +78,9 @@ Let's do that now:
 1.  Run the following command to see the status of the database creation
     process:
 
-    `cf services`
+    ```bash
+    cf services
+    ```
 
     You will see an output similar to the following:
 
@@ -96,7 +108,9 @@ and tracker applications:
 1.  Find out the base domain of your Cloud Foundry foundation by running
     the following command:
 
-    `cf domains`
+    ```bash
+    cf domains
+    ```
 
     Ignore any entries that are named or marked with "Internal" or
     "Mesh".
@@ -130,8 +144,13 @@ and tracker applications:
     Use the following command to check of the hostnames (routes) are
     already reserved:
 
-    - `cf check-route tracker-migration-dev-{your initials} {DOMAIN}`
-    - `cf check-route tracker-dev-{your initials} {DOMAIN}`
+    ```bash
+    cf check-route tracker-migration-dev-{your initials} {DOMAIN}
+    ```
+
+    ```bash
+    cf check-route tracker-dev-{your initials} {DOMAIN}
+    ```
 
     example:
 
@@ -147,8 +166,13 @@ and tracker applications:
 
 1.  Reserve your development sandbox application hostnames (routes):
 
-    - `cf create-route sandbox {DOMAIN} --hostname tracker-migration-dev-{your initials}`
-    - `cf create-route sandbox {DOMAIN} --hostname tracker-dev-{your initials}`
+    ```bash
+    cf create-route sandbox {DOMAIN} --hostname tracker-migration-dev-{your initials}
+    ```
+
+    ```bash
+    cf create-route sandbox {DOMAIN} --hostname tracker-dev-{your initials}
+    ```
 
     example:
 
@@ -167,12 +191,16 @@ Let's deploy the tracker migration and application:
     make sure the `tracker-database` database machine has finished
     provisioning:
 
-    `cf services`
+    ```bash
+    cf services
+    ```
 
 1.  Once you have verified the database machine is running,
     deploy the tracker migration and application manually:
 
-    `cf push -f deployments/cf/dev/manifest.yml`
+    ```bash
+    cf push -f deployments/cf/dev/manifest.yml
+    ```
 
     Notice the tracker migration is deployed first.
     The database is required by the tracker application,

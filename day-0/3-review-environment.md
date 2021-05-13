@@ -14,11 +14,15 @@ you will run under your instructor assigned organization.
 
 1.  Create a review space as follows:
 
-    `cf create-space review`
+    ```bash
+    cf create-space review
+    ```
 
 1.  Switch your workstation context to point to the review environment:
 
-    `cf target -s review`
+    ```bash
+    cf target -s review
+    ```
 
 ### Deploy the review database server instance in review environment
 
@@ -30,7 +34,9 @@ creating the database in the developer sandbox:
 
 1.  Execute the following:
 
-    `cf create-service p.mysql db-small tracker-database`
+    ```bash
+    cf create-service p.mysql db-small tracker-database
+    ```
 
 1.  View the output of the command,
     you should see something like this:
@@ -45,7 +51,9 @@ creating the database in the developer sandbox:
 1.  Run the following command to see the status of the database creation
     process:
 
-    `cf services`
+    ```bash
+    cf services
+    ```
 
     You will see an output similar to the following:
 

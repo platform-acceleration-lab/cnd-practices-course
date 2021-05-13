@@ -61,17 +61,24 @@ one for development, and one for local testing.
 
 -   Build and run tests:
 
-    `./gradlew clean build`
+    ```bash
+    ./gradlew clean build
+    ```
 
 -   Run the migration application locally via boot run:
 
-    `./gradlew :db-migrations:tracker-migration:bootRun`
+    ```bash
+    ./gradlew :db-migrations:tracker-migration:bootRun
+    ```
 
 -   Run the tracker application locally via boot run:
 
-    `./gradlew :application:tracker:bootRun`
+    ```bash
+    ./gradlew :application:tracker:bootRun
+    ```
 
--   View the output of the following endpoints:
+-   View the output of the following endpoints,
+    in a browser of your choice:
 
     -   Database migration endpoints:
         `http://localhost:8081/actuator/flyway`
