@@ -153,3 +153,7 @@ and tracker applications:
 1.  Configure the `route` specifications in the
     `deployments/cf/review/manifest.yml` file according to the values you
     reserved in the previous step.
+
+You will not manually deploy to review,
+the Continuous Integration Pipeline you will configure in the next
+lesson will do that automatically.

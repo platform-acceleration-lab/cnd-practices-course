@@ -6,15 +6,23 @@ You will use [Github Actions](https://docs.github.com/en/actions) to
 implement your pipelines in this course.
 
 1.  The codebase supplies the initial Continuous Integration pipeline
-    workflow.
-    Cherry pick it now:
+    workflow,
+    but it is not at the initial commit of the repository you forked.
+    It is at a commit tagged as `ci-pipeline`.
+    It was not supplied as part of the initial commit because we do not
+    want it to run until you configure your review environment..
+
+1.  Cherry pick the `ci-pipeline` commit to pull in the Continuous
+    Integration pipeline.
 
     ```bash
-    git cherry-pick pipeline
+    git cherry-pick ci-pipeline
     ```
 
-1.  Review the pipeline at `.github/workflows/ci.yml`
+    Review it at `.github/workflows/ci-pipeline.yml`
 
+    -   The pipeline is triggered on push event to the `tracker`
+        repository.
     -   The `build-and-publish` job is the key part of
         Continuous Integration that allows developers to integrate their
         work frequently on a mainline branch.
@@ -53,5 +61,25 @@ implement your pipelines in this course.
     -   User Name (the instructor gave to you): `CF_USERNAME`
     -   User Password (the instructor gave to you): `CF_PASSWORD`
 
-1.
+1.  Given you have made changes to the deployment manifest templates,
+    and pulled in the pipeline,
+    you need to stage,
+    commit,
+    and push your changes to kick off your CI pipeline:
 
+    ```bash
+    git add deployments/cf
+    git commit -m'configured review environment'
+    git push origin main
+    ```
+
+1.  This push event to the `tracker` repository will kick of the
+    pipeline.
+    Monitor it at the following url
+    (make sure to substitute <your github account>):
+
+    ```bash
+    https://github.com/<your github account>/tracker/actions
+    ```
+
+    DEMO
