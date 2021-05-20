@@ -19,6 +19,7 @@ and navigate the following in order to execute the course:
 
 ## Day 0
 
+1.  [Path to Production](./day-0/0-path.md)
 1.  [Codebase](./day-0/1-codebase.md)
 1.  [Dev Sandbox](./day-0/2-dev-sandbox.md)
 1.  [Review Environment](./day-0/3-review-environment.md)
